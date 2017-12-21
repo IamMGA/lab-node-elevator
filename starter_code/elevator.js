@@ -17,8 +17,12 @@ class Elevator {
   }
   _passengersEnter() { }
   _passengersLeave() { }
-  floorUp() { }
-  floorDown() { }
+  floorUp() {
+    this.floor < this.MAXFLOOR ? (this.floor++, console.log(this.floor)) : console.log("This is the last floor");
+  }
+  floorDown() {
+    this.floor > 0 ? (this.floor--, console.log(this.floor)) : console.log("This is the first floor");
+  }
   call() { }
   log() {
     console.log(`Direction: ${this.direction} | Floor: ${this.floor}`);
