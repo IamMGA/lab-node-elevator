@@ -10,19 +10,19 @@ class Elevator {
   }
 
   start() {
-    var interval = setInterval(() => { this.update(); }, 1000)
+    this.intervalId = setInterval(() => { this.update(); }, 1000)
   }
   stop() {
-    clearInterval(interval);
     console.log('Elevator stop');
+    clearInterval(this.intervalId);
   }
   update() {
     this.log();
     this._passengersEnter();
     this._passengersLeave();
-    this.floor < this.requests[0] ? this.floorUp() : this.floorDown();
     if (this.floor === this.requests[0]) { this.requests.shift() }
-    if (this.requests.length === 0){this.stop()}
+    if (this.requests.length == 0 && this.floor == 0){this.stop()}
+    this.floor < this.requests[0] ? this.floorUp() : this.floorDown();
   }
   _passengersEnter() {
     this.waitingList.forEach((elem, index) => {
@@ -44,12 +44,12 @@ class Elevator {
   }
   floorUp() {
     this.floor < this.MAXFLOOR ?
-      (this.floor++ , this.direction = "up", console.log(`Floor: ${this.floor}`)) :
+      (this.floor++ , this.direction = "up") :
       console.log("This is the last floor");
   }
   floorDown() {
     this.floor > 0 ?
-      (this.floor-- , this.direction = "down", console.log(`Floor: ${this.floor}`)) :
+      (this.floor-- , this.direction = "down") :
       console.log("This is the first floor");
   }
   call(person) {
